@@ -1,0 +1,167 @@
+.comunicacion-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .comunicacion-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+            transition: transform 0.3s;
+        }
+        
+        .comunicacion-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .comunicado-item {
+            border: 1px solid #e0e5f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        .comunicado-item:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 3px 10px rgba(0, 51, 153, 0.1);
+        }
+        
+        .comunicado-urgente {
+            border-left: 4px solid #dc3545;
+            background: rgba(220, 53, 69, 0.05);
+        }
+        
+        .comunicado-importante {
+            border-left: 4px solid #ffc107;
+            background: rgba(255, 193, 7, 0.05);
+        }
+        
+        .comunicado-normal {
+            border-left: 4px solid var(--info-color);
+            background: rgba(23, 162, 184, 0.05);
+        }
+        
+        .comunicado-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .comunicado-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .badge-presidente-central {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .badge-prioridad {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .badge-urgente {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .badge-importante {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        
+        .badge-normal {
+            background-color: var(--info-color);
+            color: white;
+        }
+        
+        .badge-fecha {
+            background-color: #6c757d;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .informe-form {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px dashed var(--primary-color);
+        }
+        
+        .btn-enviar-informe {
+            background: linear-gradient(135deg, var(--success-color), #20c997);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-enviar-informe:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+            color: white;
+        }
+        
+        .filtros-comunicacion {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+        
+        .contador-comunicados {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .comunicado-no-leido {
+            position: relative;
+        }
+        
+        .comunicado-no-leido::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 10px;
+            height: 10px;
+            background: #dc3545;
+            border-radius: 50%;
+        }
+        
+        .info-edificio {
+            background: var(--success-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
