@@ -273,9 +273,12 @@ $selectedMonth = $_POST['month'] ?? $currentMonth;
                             </div>
                         </div>
                     </div>
-
                     
                 </div>
+                <div class="row mb-4">
+                        <?php    include('../../Controlador/funciones/tablamorosostotal.php');?>
+                </div>
+                    
             </div>
 
             <!-- Quick Actions + Recent Announcements -->

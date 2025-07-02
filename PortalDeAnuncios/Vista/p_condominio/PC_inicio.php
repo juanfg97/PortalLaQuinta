@@ -126,6 +126,10 @@ include '../../Controlador/conexion_bd_login.php';
             </ul>
         </div>
     </nav>
+    <div id="logo-pdf" style="display:none; text-align:center; margin-bottom:20px;">
+    <img src="../Img/logo.png" alt="Logo La Quinta" style="height:80px;">
+    <h4>Reporte de Morosos - Edificio <?php echo $_SESSION['Terraza'] . $_SESSION['Edificio']; ?> </h4>
+</div>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -147,6 +151,7 @@ include '../../Controlador/conexion_bd_login.php';
                 <!-- Resumen General -->
                 <div class="col-lg-8">
                     <div class="row">
+            
                         <div class="col-md-6 col-sm-6 mb-3">
                             <div class="dashboard-card">
                                 <div class="card-header">
@@ -190,7 +195,7 @@ include '../../Controlador/conexion_bd_login.php';
                                 </div>
                             </div>
                         </div>
-                        
+                        <?php include ('../../Controlador/funciones/tablamoroso.php');  ?>
                         <div class="col-12 mb-3">
                             <div class="dashboard-card">
                                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -211,6 +216,7 @@ include '../../Controlador/conexion_bd_login.php';
                             </div>
                         </div>
                     </div>
+                    
                 </div>
 
                 <!-- Acciones Rápidas -->
@@ -251,7 +257,7 @@ include '../../Controlador/conexion_bd_login.php';
             </div>
         </div>
     </footer>
-
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
     <script src="../../Modelo/js/menuHamburguesa.js"></script>

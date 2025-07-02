@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
         mostrarCargando(true);
         
         try {
-            const response = await fetch('../../Controlador/controlador_cambiarpass.php', {
+            const response = await fetch('Controlador/formularios/controlador_cambiarpass.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

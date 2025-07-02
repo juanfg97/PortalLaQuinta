@@ -85,7 +85,7 @@
             <button type="submit" class="submit-button">Acceder al Portal</button>
          
             <div class="form-footer">
-                <p>¿Olvidaste tu contraseña? <a href="Vista/residente/Recuperar_password.php">Funcion en desarrollo</a></p>
+                <p> <a href="Recuperar_password.php">¿Olvidaste tu contraseña?</a></p>
             </div>
             </div>
             </form>

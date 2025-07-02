@@ -7,8 +7,6 @@ if (empty($_SESSION['usuario'])) {
     exit();
 }
 include  '../../Controlador/conexion_bd_login.php'; 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,13 +16,11 @@ include  '../../Controlador/conexion_bd_login.php';
     <title>Portal Residente - La Quinta</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/inicio.css">
-     <link rel="shortcut icon" href="../Img/favicon.png" type="image/x-icon">
-  
+    <link rel="shortcut icon" href="../Img/favicon.png" type="image/x-icon">
 </head>
 <body>
-    
 
-  <header class="main-header">
+    <header class="main-header">
         <div class="container">
             <!-- Móvil: Header reorganizado -->
             <div class="d-md-none">
@@ -44,8 +40,8 @@ include  '../../Controlador/conexion_bd_login.php';
                 </div>
                 
                 <div class="user-info-mobile">
-                    <h5>Bienvenido <?php   echo $_SESSION['nombre_completo']; ?></h5>
-                    <a href="" class="btn btn-outline-primary btn-sm">
+                    <h5>Bienvenido <?php echo $_SESSION['nombre_completo']; ?></h5>
+                    <a href="../../Controlador/funciones/logout.php" class="btn btn-outline-primary btn-sm">
                         <i class="fas fa-sign-out-alt me-1"></i>Cerrar Sesión
                     </a>
                 </div>
@@ -66,7 +62,7 @@ include  '../../Controlador/conexion_bd_login.php';
                 </div>
                 <div class="col-md-6">
                     <div class="user-info">
-                        <h5>Bienvenido <?php   echo $_SESSION['nombre_completo']; ?> </h5>
+                        <h5>Bienvenido <?php echo $_SESSION['nombre_completo']; ?></h5>
                         <div class="mt-2">
                             <a href="../../Controlador/funciones/logout.php" class="btn btn-outline-primary btn-sm">
                                 Cerrar Sesión
@@ -83,40 +79,33 @@ include  '../../Controlador/conexion_bd_login.php';
         <div class="container">
             <ul class="nav nav-pills flex-column flex-md-row">
                 <li class="nav-item">
-                    <a class="nav-link " href="inicio.php" onclick="closeMenu()">
-                        
-                        <span class="nav-text">  Inicio</span>
+                    <a class="nav-link" href="inicio.php" onclick="closeMenu()">
+                        <span class="nav-text">Inicio</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="anunciog.php" onclick="closeMenu()">
-                        
-                        <span class="nav-text">  Anuncios</span>
+                        <span class="nav-text">Anuncios</span>
                     </a>
                 </li>
-                   <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="informacionEdificio.php" onclick="closeMenu()">
-                        
-                        <span class="nav-text">  Información edificio</span>
+                        <span class="nav-text">Información edificio</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="pagos.php" onclick="closeMenu()">
-                        
-                        <span class="nav-text">  Pagos</span>
+                        <span class="nav-text">Pagos</span>
                     </a>
                 </li>
-            
-                  <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="servicios.php" onclick="closeMenu()">
-                    
-                        <span class="nav-text">  Servicios</span>
+                        <span class="nav-text">Servicios</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="configuracion.php" onclick="closeMenu()">
-                        
-                        <span class="nav-text">  Configuración</span>
+                        <span class="nav-text">Configuración</span>
                     </a>
                 </li>
             </ul>
@@ -130,7 +119,7 @@ include  '../../Controlador/conexion_bd_login.php';
             <div class="welcome-section">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h2>Bienvenido, <?php   echo $_SESSION['nombre_completo'];?></h2>
+                        <h2>Bienvenido, <?php echo $_SESSION['nombre_completo']; ?></h2>
                         <p>Tu portal personal para mantenerte informada sobre todos los anuncios, gestionar tus pagos de condominio y enviar reportes al presidente de tu edificio.</p>
                     </div>
                     <div class="col-md-4 text-center d-none d-md-block">
@@ -151,11 +140,13 @@ include  '../../Controlador/conexion_bd_login.php';
                                     <span class="card-title">Anuncios</span>
                                 </div>
                                 <div class="card-content">
-                                    <div class="stat-number text-info"><?php
-                            include '../../Controlador/funciones/contaranuncios.php';
-                            echo contarAnunciosMesActual($conexion);
-                            ?></div>Anuncios generales de este mes</div>
-                                    <div class="stat-label">
+                                    <div class="stat-number text-info">
+                                        <?php
+                                        include '../../Controlador/funciones/contaranuncios.php';
+                                        echo contarAnunciosMesActual($conexion);
+                                        ?>
+                                    </div>
+                                    <div class="stat-label">Anuncios generales de este mes</div>
                                 </div>
                             </div>
                         </div>
@@ -166,22 +157,26 @@ include  '../../Controlador/conexion_bd_login.php';
                                     <span class="card-title">Estado de Pagos</span>
                                 </div>
                                 <div class="card-content">
-                                    <div class="stat-number text-warning"><?php
-                                    include '../../Controlador/funciones/cantidadDeudas.php';
-                                  $pendientes = obtenerCantidadDeudasPorEstado('pendiente');
-                                  if($pendientes === 0){
-                                    echo '✓';
-                                    echo '</div>';
-                                    echo ' <div class="stat-label">Esta solvente</div>';
-                                  }
-                                    else{
-
-                                            
-                                    echo $pendientes;
-                                    echo '</div>';
-                                    echo ' <div class="stat-label">Pendientes por pagar</div>';
-                                    }?>
-                                    
+                                    <div class="stat-number text-warning">
+                                        <?php
+                                        include '../../Controlador/funciones/cantidadDeudas.php';
+                                        $pendientes = obtenerCantidadDeudasPorEstado('pendiente');
+                                        if($pendientes === 0){
+                                            echo '✓';
+                                        } else {
+                                            echo $pendientes;
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="stat-label">
+                                        <?php
+                                        if($pendientes === 0){
+                                            echo 'Esta solvente';
+                                        } else {
+                                            echo 'Pendientes por pagar';
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -192,9 +187,13 @@ include  '../../Controlador/conexion_bd_login.php';
                                     <span class="card-title">Anuncios del edificio</span>
                                 </div>
                                 <div class="card-content">
-                                    <div class="stat-number text-warning"><?php    include '../../Controlador/funciones/contaredificioinfo.php';
-                        $anunciosE = contarAnunciosmesedificio($conexion);
-                        echo $anunciosE; ?></div> 
+                                    <div class="stat-number text-warning">
+                                        <?php    
+                                        include '../../Controlador/funciones/contaredificioinfo.php';
+                                        $anunciosE = contarAnunciosmesedificio($conexion);
+                                        echo $anunciosE; 
+                                        ?>
+                                    </div> 
                                     <div class="stat-label">En Total este Mes</div>
                                 </div>
                             </div>
@@ -206,12 +205,13 @@ include  '../../Controlador/conexion_bd_login.php';
                                     <span class="card-title">Servicios</span>
                                 </div>
                                 <div class="card-content">
-                                    <div class="stat-number text-success"><?php   include '../../Controlador/funciones/contarservicios.php';
-                                    
-                                    $servicios =contarServicios($conexion);
-                                    echo $servicios;
-                                    
-                                    ?></div>
+                                    <div class="stat-number text-success">
+                                        <?php   
+                                        include '../../Controlador/funciones/contarservicios.php';
+                                        $servicios = contarServicios($conexion);
+                                        echo $servicios;
+                                        ?>
+                                    </div>
                                     <div class="stat-label">Activos en mi edificio</div>
                                 </div>
                             </div>
@@ -230,7 +230,6 @@ include  '../../Controlador/conexion_bd_login.php';
                             <a href="pagos.php" class="quick-action-btn">
                                 <span class="action-text">💰 Realizar Pago</span>
                             </a>
-                           
                         </div>
                     </div>
                 </div>
@@ -257,7 +256,7 @@ include  '../../Controlador/conexion_bd_login.php';
                 </div>
 
                 <!-- Anuncios del Edificio Recientes -->
-                   <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 mb-4">
                     <div class="dashboard-card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <div class="d-flex align-items-center">
@@ -273,10 +272,67 @@ include  '../../Controlador/conexion_bd_login.php';
                         </div>
                     </div>
                 </div>
-                
+            </div>
+
+            <!-- Sección de Reportes -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <div class="card-indicator indicator-reportes">📝</div>
+                            <span class="card-title">Enviar Reportes</span>
+                        </div>
+                        <div class="card-content">
+                            <p class="text-muted mb-4">
+                                Utiliza este formulario para reportar incidencias, sugerencias, problemas en el sistema o cualquier situación que requiera atención de el presidente central.
+                            </p>
+                        
+
+                            <form id="reporteForm" action="../../Controlador/funciones/enviar_reporte.php" method="POST">
+    <div class="mb-3">
+        <label for="asunto" class="form-label">
+            <i class="fas fa-tag me-2"></i>Asunto del Reporte <span class="text-danger">*</span>
+        </label>
+        <input type="text" 
+               class="form-control" 
+               id="asunto" 
+               name="asunto" 
+               placeholder="Ingresa el asunto del reporte" 
+               maxlength="100" 
+               required>
+        <div class="character-counter" id="asuntoCounter">0/100 caracteres</div>
+    </div>
+
+    <div class="mb-4">
+        <label for="descripcion" class="form-label">
+            <i class="fas fa-align-left me-2"></i>Descripción Detallada <span class="text-danger">*</span>
+        </label>
+        <textarea class="form-control" 
+                  id="descripcion" 
+                  name="descripcion" 
+                  rows="6" 
+                  placeholder="Describe detalladamente la situación, problema o sugerencia..." 
+                  required 
+                  maxlength="1000"></textarea>
+        <div class="character-counter" id="descripcionCounter">0/1000 caracteres</div>
+    </div>
+
+    <div class="d-flex flex-column flex-md-row gap-3 justify-content-end">
+        <button type="button" class="btn btn-outline-secondary" onclick="limpiarFormulario()">
+            <i class="fas fa-eraser me-2"></i>Limpiar Formulario
+        </button>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-paper-plane me-2"></i>Enviar Reporte
+        </button>
+    </div>
+</form>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-</main>
+    </main>
 
     <!-- Footer -->
     <footer class="main-footer">
