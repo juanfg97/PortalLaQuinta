@@ -1,7 +1,6 @@
 <?php
 session_start();
-if (empty($_SESSION['usuario'])) {
-    // Redirigir si no hay sesión activa
+if(!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'residente') {
     session_destroy();
     header('Location: /PortalDeAnuncios/index.php');
     exit();
@@ -287,8 +286,7 @@ include  '../../Controlador/conexion_bd_login.php';
                                 Utiliza este formulario para reportar incidencias, sugerencias, problemas en el sistema o cualquier situación que requiera atención de el presidente central.
                             </p>
                         
-
-                            <form id="reporteForm" action="../../Controlador/funciones/enviar_reporte.php" method="POST">
+                        <form id="reporteForm" method="POST">
     <div class="mb-3">
         <label for="asunto" class="form-label">
             <i class="fas fa-tag me-2"></i>Asunto del Reporte <span class="text-danger">*</span>
@@ -321,11 +319,23 @@ include  '../../Controlador/conexion_bd_login.php';
         <button type="button" class="btn btn-outline-secondary" onclick="limpiarFormulario()">
             <i class="fas fa-eraser me-2"></i>Limpiar Formulario
         </button>
+
+        <!-- Dentro del <form> -->
+<button 
+    type="button" 
+    class="btn btn-outline-info" 
+    data-bs-toggle="modal" 
+    data-bs-target="#modalReportes" 
+    formnovalidate>
+    <i class="fas fa-list me-2"></i>Ver Mis Reportes
+</button>
+
         <button type="submit" class="btn btn-primary">
             <i class="fas fa-paper-plane me-2"></i>Enviar Reporte
         </button>
     </div>
 </form>
+
 
                         </div>
                     </div>
@@ -333,7 +343,96 @@ include  '../../Controlador/conexion_bd_login.php';
             </div>
         </div>
     </main>
+                                        <?php
 
+$usuario = $_SESSION['usuario'];
+
+// Consulta reportes del usuario
+$sql = "SELECT id, asunto, descripcion, fecha, estado FROM reportes WHERE usuario = ? ORDER BY fecha DESC";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("s", $usuario);
+$stmt->execute();
+$resultado = $stmt->get_result();
+
+?>
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="modalReportes" tabindex="-1" aria-labelledby="modalReportesLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalReportesLabel">Mis Reportes</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body" id="reporteContenido">
+        <?php if ($resultado->num_rows > 0): ?>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Asunto</th>
+                            <th>Descripción</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($fila = $resultado->fetch_assoc()): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($fila['id']) ?></td>
+                                <td><?= htmlspecialchars($fila['asunto']) ?></td>
+                                <td><?= htmlspecialchars($fila['descripcion']) ?></td>
+                                <td><?= htmlspecialchars($fila['fecha']) ?></td>
+                                <td><?= htmlspecialchars(ucfirst($fila['estado'])) ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else: ?>
+            <p class="text-muted">No has realizado reportes aún.</p>
+        <?php endif; ?>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-primary" onclick="imprimirPDF()">
+          <i class="fas fa-file-pdf me-2"></i> Imprimir PDF
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function imprimirPDF() {
+    const contenido = document.getElementById("reporteContenido").innerHTML;
+    const ventana = window.open('', '', 'height=800,width=1200');
+    
+    ventana.document.write('<html><head><title>Mis Reportes</title>');
+    ventana.document.write(`
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        <style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            h2 { text-align: center; margin-bottom: 20px; }
+            table { width: 100%; border-collapse: collapse; }
+            th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+            th { background-color: #f8f9fa; }
+            tr:nth-child(even) { background-color: #f2f2f2; }
+        </style>
+    `);
+    ventana.document.write('</head><body>');
+    ventana.document.write('<h2>Listado de Reportes</h2>');
+    ventana.document.write(contenido);
+    ventana.document.write('</body></html>');
+
+    ventana.document.close();
+    ventana.focus();
+    ventana.print();
+    ventana.close();
+}
+</script>
     <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
@@ -352,5 +451,103 @@ include  '../../Controlador/conexion_bd_login.php';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
     <script src="../../Modelo/js/menuHamburguesa.js"></script>
+    <script src="../../Modelo/js/reportes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    // Contadores en tiempo real
+    function actualizarContador(inputId, counterId, maxLength) {
+        const input = document.getElementById(inputId);
+        const counter = document.getElementById(counterId);
+
+        const update = () => {
+            const longitud = input.value.length;
+            counter.textContent = `${longitud}/${maxLength} caracteres`;
+            counter.style.color = longitud > maxLength * 0.9 ? 'red' : '';
+        };
+
+        input.addEventListener('input', update);
+        update(); // Inicializa el contador
+    }
+
+    // Función para limpiar el formulario
+    function limpiarFormulario() {
+        const formulario = document.getElementById('reporteForm');
+        formulario.reset(); // Limpia todos los campos del formulario
+
+        // Reinicia contadores de caracteres
+        document.getElementById('asuntoCounter').textContent = '0/100 caracteres';
+        document.getElementById('asuntoCounter').style.color = '';
+
+        document.getElementById('descripcionCounter').textContent = '0/1000 caracteres';
+        document.getElementById('descripcionCounter').style.color = '';
+    }
+
+    // Ejecuta contadores cuando el DOM está listo
+    document.addEventListener('DOMContentLoaded', () => {
+        actualizarContador('asunto', 'asuntoCounter', 100);
+        actualizarContador('descripcion', 'descripcionCounter', 1000);
+    });
+</script>
+
+    <script>
+    // Función para actualizar contador
+    function actualizarContador(inputId, counterId, maxLength) {
+        const input = document.getElementById(inputId);
+        const counter = document.getElementById(counterId);
+
+        input.addEventListener('input', () => {
+            const longitud = input.value.length;
+            counter.textContent = `${longitud}/${maxLength} caracteres`;
+
+            // Opcional: cambiar color si se acerca al límite
+            if (longitud > maxLength * 0.9) {
+                counter.style.color = 'red';
+            } else {
+                counter.style.color = '';
+            }
+        });
+    }
+
+    // Ejecutar al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+        actualizarContador('asunto', 'asuntoCounter', 100);
+        actualizarContador('descripcion', 'descripcionCounter', 1000);
+    });
+</script>
+<script>
+    // Contadores en tiempo real
+    function actualizarContador(inputId, counterId, maxLength) {
+        const input = document.getElementById(inputId);
+        const counter = document.getElementById(counterId);
+
+        const update = () => {
+            const longitud = input.value.length;
+            counter.textContent = `${longitud}/${maxLength} caracteres`;
+            counter.style.color = longitud > maxLength * 0.9 ? 'red' : '';
+        };
+
+        input.addEventListener('input', update);
+        update(); // Inicializa el contador
+    }
+
+    // Función para limpiar el formulario
+    function limpiarFormulario() {
+        const formulario = document.getElementById('reporteForm');
+        formulario.reset(); // Limpia todos los campos del formulario
+
+        // Reinicia contadores de caracteres
+        document.getElementById('asuntoCounter').textContent = '0/100 caracteres';
+        document.getElementById('asuntoCounter').style.color = '';
+
+        document.getElementById('descripcionCounter').textContent = '0/1000 caracteres';
+        document.getElementById('descripcionCounter').style.color = '';
+    }
+
+    // Ejecuta contadores cuando el DOM está listo
+    document.addEventListener('DOMContentLoaded', () => {
+        actualizarContador('asunto', 'asuntoCounter', 100);
+        actualizarContador('descripcion', 'descripcionCounter', 1000);
+    });
+</script>
 </body>
 </html>

@@ -13,19 +13,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             loginResidente($usuario, $password);
             $stmt->close();
     $conexion->close();
-    exit;
+    
             break;
         case 'presidente_junta':
             loginpresidenteCondominio($usuario, $password);
             $stmt->close();
     $conexion->close();
-    exit;
+    
             break;
         case 'presidente_central':
             loginpresidenteCentral($usuario, $password);
             $stmt->close();
     $conexion->close();
-    exit;
+    
             break;
         default:
             echo json_encode(['success' => false, 'message' => 'Tipo de usuario inválido.']);

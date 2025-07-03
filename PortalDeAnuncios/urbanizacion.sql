@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2025 a las 00:18:29
+-- Tiempo de generación: 03-07-2025 a las 23:38:38
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -154,7 +154,7 @@ INSERT INTO `deudas` (`id`, `usuario`, `tipo_deuda`, `monto`, `fecha_vencimiento
 (22, '1A-11', 'condominio', 0.00, '2025-07-01', 'Cuota mensual de condominio', '2025-06-11 04:00:00', 'completo', ''),
 (23, '1A-11', 'otros', 0.00, '2025-06-14', 'optvrijgbbghri', '2025-06-13 04:00:00', 'completo', ''),
 (24, '1A-11', 'condominio', 0.00, '2025-06-17', 'Pago de condominio', '2025-06-13 04:00:00', 'completo', 'Ese pago movil es falso'),
-(25, '1A-11', 'condominio', 500.99, '2025-07-01', 'Cuota Mensual de condominio', '2025-06-14 04:00:00', 'pendiente', ''),
+(25, '1A-11', 'condominio', 500.99, '2025-07-01', 'Cuota Mensual de condominio', '2025-06-14 04:00:00', 'en proceso', ''),
 (26, '1A-12', 'condominio', 500.99, '2025-07-01', 'Cuota Mensual de condominio', '2025-06-14 04:00:00', 'pendiente', ''),
 (27, '1A-13', 'condominio', 500.99, '2025-07-01', 'Cuota Mensual de condominio', '2025-06-14 04:00:00', 'pendiente', 'No se lee la imagen'),
 (28, '1A-14', 'condominio', 500.99, '2025-07-01', 'Cuota Mensual de condominio', '2025-06-14 04:00:00', 'pendiente', 'Los datos no son legibles'),
@@ -194,8 +194,8 @@ INSERT INTO `deudas` (`id`, `usuario`, `tipo_deuda`, `monto`, `fecha_vencimiento
 (65, '1A-53', 'condominio', 500.00, '2025-06-30', '', '2025-06-25 04:00:00', 'pendiente', ''),
 (66, '1A-54', 'condominio', 500.00, '2025-06-30', '', '2025-06-25 04:00:00', 'pendiente', ''),
 (67, '1A-11', 'otros', 500.00, '2025-06-24', '', '2025-06-25 04:00:00', 'pendiente', NULL),
-(68, '1A-11', 'otros', 600.00, '2025-06-28', '', '2025-06-25 04:00:00', 'pendiente', NULL),
-(69, '1A-11', 'condominio', 500.00, '2025-06-26', '', '2025-06-25 04:00:00', 'pendiente', NULL),
+(68, '1A-11', 'otros', 600.00, '2025-06-28', '', '2025-06-25 04:00:00', 'en proceso', NULL),
+(69, '1A-11', 'condominio', 500.00, '2025-06-26', '', '2025-06-25 04:00:00', 'en proceso', NULL),
 (70, '1A-12', 'condominio', 500.00, '2025-06-26', '', '2025-06-25 04:00:00', 'pendiente', NULL),
 (71, '1A-13', 'condominio', 500.00, '2025-06-26', '', '2025-06-25 04:00:00', 'pendiente', NULL),
 (72, '1A-14', 'condominio', 500.00, '2025-06-26', '', '2025-06-25 04:00:00', 'pendiente', NULL),
@@ -214,7 +214,30 @@ INSERT INTO `deudas` (`id`, `usuario`, `tipo_deuda`, `monto`, `fecha_vencimiento
 (85, '1A-51', 'condominio', 500.00, '2025-06-26', '', '2025-06-25 04:00:00', 'pendiente', NULL),
 (86, '1A-52', 'condominio', 500.00, '2025-06-26', '', '2025-06-25 04:00:00', 'pendiente', NULL),
 (87, '1A-53', 'condominio', 500.00, '2025-06-26', '', '2025-06-25 04:00:00', 'pendiente', NULL),
-(88, '1A-54', 'condominio', 500.00, '2025-06-26', '', '2025-06-25 04:00:00', 'pendiente', NULL);
+(88, '1A-54', 'condominio', 500.00, '2025-06-26', '', '2025-06-25 04:00:00', 'pendiente', NULL),
+(89, '1B-11', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(90, '1B-12', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(91, '1B-13', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(92, '1B-14', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(93, '1B-21', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(94, '1B-22', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(95, '1B-23', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(96, '1B-24', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(97, '1B-31', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(98, '1B-32', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(99, '1B-33', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(100, '1B-34', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(101, '1B-41', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(102, '1B-42', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(103, '1B-43', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(104, '1B-44', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(105, '1B-51', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(106, '1B-52', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(107, '1B-53', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(108, '1B-54', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(109, '2B-11', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(110, '2B-12', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL),
+(111, '2B-13', 'condominio', 400.00, '2025-06-30', '', '2025-07-01 04:00:00', 'pendiente', NULL);
 
 -- --------------------------------------------------------
 
@@ -781,9 +804,9 @@ INSERT INTO `edificios` (`Terraza`, `Edificio`, `Piso`, `Apartamento`, `usuario`
 ('13', 'F', '5', '2', '13F-52', 'Propietario Pendiente', '13F-52', NULL, 'correo@example.com', '000-0000000'),
 ('13', 'F', '5', '3', '13F-53', 'Propietario Pendiente', '13F-53', NULL, 'correo@example.com', '000-0000000'),
 ('13', 'F', '5', '4', '13F-54', 'Propietario Pendiente', '13F-54', NULL, 'correo@example.com', '000-0000000'),
-('1', 'A', '1', '1', '1A-11', 'Juan Fernández', '$2y$10$pZa9I0LY5r48HKnQz2xOMuoqaMcf/pWHWAmoNduajF6gbuF/NWQBy', '2025-06-07', 'juanmanuelfg95@gmail.cpm', '04121234567'),
+('1', 'A', '1', '1', '1A-11', 'Juan Fernández', '$2y$10$RrR3wWZnUkSJfc3dMvNLcOuieO..ipMfj/e70LSfZZy.EQJ960ISy', '2025-07-01', 'juanmanuelfg9@gmail.com', '04121234567'),
 ('1', 'A', '1', '2', '1A-12', 'Antonio Perez', '$2y$10$ur8/./xMmyrauZfNWYJ0XuOHkKOGVE8OOA3DxLMHoVy4wUchm1Uze', '2025-06-14', 'antonio3216@gmail.com', '04143001934'),
-('1', 'A', '1', '3', '1A-13', 'Antonio Perez', '$2y$10$g5DQ2rGIH0/InFUsdO2pdezt9II6TsedGkCkuDo0u3jrQzLMDqZqK', '2025-06-14', 'antonio321@gmail.com', '04143001934'),
+('1', 'A', '1', '3', '1A-13', 'Maria Victoria', '$2y$10$g5DQ2rGIH0/InFUsdO2pdezt9II6TsedGkCkuDo0u3jrQzLMDqZqK', '2025-06-14', 'mavi.riosh@gmail.com', '04143001934'),
 ('1', 'A', '1', '4', '1A-14', 'Juan Gonzalez', '$2y$10$Zw9GBoBjJ.l3AhpKVSEIp.Fr58HGg0.KEpqbRoYmwb6E5eFWJuiUe', '2025-06-14', 'juanmanuelfg123@gmail.com', '04143001934'),
 ('1', 'A', '2', '1', '1A-21', 'Propietario Pendiente', '1A-21', NULL, 'correo@example.com', '000-0000000'),
 ('1', 'A', '2', '2', '1A-22', 'Propietario Pendiente', '$2y$10$2RRaJJ4V.ATQtEaPQeKay.6tBnDxNAVRGdKEedVACn7qws8XUiQZe', NULL, 'correo@example.com', '000-0000000'),
@@ -991,7 +1014,7 @@ INSERT INTO `edificios` (`Terraza`, `Edificio`, `Piso`, `Apartamento`, `usuario`
 ('3', 'B', '3', '4', '3B-34', 'Propietario Pendiente', '3B-34', NULL, 'correo@example.com', '000-0000000'),
 ('3', 'B', '4', '1', '3B-41', 'Propietario Pendiente', '3B-41', NULL, 'correo@example.com', '000-0000000'),
 ('3', 'B', '4', '2', '3B-42', 'Propietario Pendiente', '3B-42', NULL, 'correo@example.com', '000-0000000'),
-('3', 'B', '4', '3', '3B-43', 'Juan Fernandez', '$2y$10$cYosoLq25xjmtcyxhsO5ru6JddIiEL8jRb3UoHBp3dfAtaZLFm60i', NULL, 'juanmanuelfg9@gmail.com', '04143001934'),
+('3', 'B', '4', '3', '3B-43', 'Juan Fernandez', '$2y$10$44IGAz2r4D/LgrqHaXl8lO.xNsGPx7CazxN98G/GGEQZKdkmQ0q2y', NULL, 'juanmanuelfg9@gmail.com', '04143001934'),
 ('3', 'B', '4', '4', '3B-44', 'Propietario Pendiente', '3B-44', NULL, 'correo@example.com', '000-0000000'),
 ('3', 'B', '5', '1', '3B-51', 'Propietario Pendiente', '3B-51', NULL, 'correo@example.com', '000-0000000'),
 ('3', 'B', '5', '2', '3B-52', 'Propietario Pendiente', '3B-52', NULL, 'correo@example.com', '000-0000000'),
@@ -1615,7 +1638,10 @@ INSERT INTO `pagos` (`id`, `usuario`, `metodo_pago`, `deudaid`, `fecha_pago`, `b
 (13, '1A-13', 'pago_movil', 27, '2025-06-14', 'Banesco', '1234567890123', 'V-29557849', 500.99, '04143001934', 'comprobante_684d82ff9effe_pago cuota 1.pdf', '2025-06-14 14:11:11', 'Pago de condominio', 'rechazado'),
 (14, '1A-14', 'transferencia', 28, '2025-06-14', 'Mercantil', '1234567891234', 'V-29557849', 500.99, '04143001934', 'comprobante_684dbd4c5265c_pago cuota 1.pdf', '2025-06-14 18:19:56', 'Pago de la cuota mensual de condominio', 'rechazado'),
 (15, '1A-14', 'transferencia', 46, '2025-06-14', 'Banesco', '1234567891234', 'V-29557849', 100.00, '04143001934', 'comprobante_684dbf1c6125f_descarga.jpg', '2025-06-14 18:27:40', 'Cuota de mantenimiento pago', 'aprobado'),
-(16, '1A-11', 'transferencia', 24, '2025-06-14', 'banesco', '1234567890123', 'V-29557849', 50.00, '04143001934', 'comprobante_684dc18a734db_pago cuota 1.pdf', '2025-06-14 18:38:02', 'pago', 'aprobado');
+(16, '1A-11', 'transferencia', 24, '2025-06-14', 'banesco', '1234567890123', 'V-29557849', 50.00, '04143001934', 'comprobante_684dc18a734db_pago cuota 1.pdf', '2025-06-14 18:38:02', 'pago', 'aprobado'),
+(17, '1A-11', 'transferencia', 25, '2025-07-02', 'Mercantil', '0122093428429', 'V-29557849', 500.99, '04143001934', 'comprobante_6865c21d82523_descarga (1).jpg', '2025-07-02 23:34:53', 'pago de deuda', 'en proceso'),
+(18, '1A-11', 'pago_movil', 69, '2025-07-02', 'Mercantil', '0123456789012', 'V-29557849', 500.00, '04143001934', 'comprobante_6865c2b41cd86_futsal-unsplash.jpg', '2025-07-02 23:37:24', '', 'en proceso'),
+(19, '1A-11', 'transferencia', 68, '2025-07-02', 'Banesco', '0123212345654', 'V-29557849', 600.00, '04143001934', 'comprobante_6865c3cf85d01_CORTE.png', '2025-07-02 23:42:07', 'pago deuda', 'en proceso');
 
 -- --------------------------------------------------------
 
@@ -1639,7 +1665,7 @@ CREATE TABLE `presidente_central` (
 --
 
 INSERT INTO `presidente_central` (`id`, `usuario`, `password`, `ultima_modificacion`, `nombre_completo`, `telefono`, `correo`, `ultimo_login`) VALUES
-(1, 'juanfg', '$2y$10$FmKuIYZCteoB9NcsP5LVhuNQsGa1HJdv9rTN8lA1eDz4R8W/J2qZy', '2025-06-07', 'Juan Perez', '02123032547', 'juanito1@gmail.com', '2025-06-24 21:12:29');
+(1, 'juanfg', '$2y$10$FmKuIYZCteoB9NcsP5LVhuNQsGa1HJdv9rTN8lA1eDz4R8W/J2qZy', '2025-06-07', 'Juan Perez', '02123032547', 'juanito1@gmail.com', '2025-07-03 17:20:39');
 
 -- --------------------------------------------------------
 
@@ -1664,10 +1690,36 @@ CREATE TABLE `presidente_condominio` (
 --
 
 INSERT INTO `presidente_condominio` (`id`, `Terraza`, `Edificio`, `usuario`, `password`, `ultima_modificacion`, `nombre_completo`, `telefono`, `correo`) VALUES
-(1, '1', 'A', 'juanfg', '$2y$10$QOPWbDtQ5XmL8NcuyhPrx.0PO7FmWuYDD82assdjTH/6QD/V8NsS6', NULL, 'Juan Fernandez', '04143001934', 'juanmanuelfg9@gmail.com'),
+(1, '1', 'A', 'juanfg', '$2y$10$evMYBkdGU6s67BBQb5lo.eNaF.Zx7dtlmHkQHCGKxJL0gU7MH9E7O', NULL, 'Juan Fernandez', '04143001934', 'juanmanuelfg9@gmail.com'),
 (2, '1', 'B', 'juangf', '$2y$10$..cbUUm8A8x0AyAx80Bwx.TvNVvBemxuQDXDgVnzePD17mbvqtSJy', NULL, 'Juan Gonzalez', '04143001934', 'juanmanuelfg95@gmail.com'),
 (4, '2', 'B', 'pedro11', '$2y$10$xYsnJfDogBxbwkKw4iCdb.FfnIWDp/DJaBOryclIV9UYSQU77LX.q', NULL, 'Pedro Perez', '04241234567', 'pedro@gmail.com'),
 (5, '5', 'C', 'mariav', '$2y$10$20qhpu.qWkFuJf4z9JBPguNPVNqWZTCynsz./x55cRR0SizuEtEPG', NULL, 'Maria Victoria', '041612345678', 'maria@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reportes`
+--
+
+CREATE TABLE `reportes` (
+  `id` int(11) NOT NULL,
+  `usuario` varchar(100) NOT NULL,
+  `nombre_completo` varchar(150) NOT NULL,
+  `asunto` varchar(100) NOT NULL,
+  `descripcion` text NOT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `fecha` datetime NOT NULL,
+  `estado` varchar(20) DEFAULT 'pendiente' COMMENT 'pendiente, en_proceso, resuelto',
+  `ubicacion` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reportes`
+--
+
+INSERT INTO `reportes` (`id`, `usuario`, `nombre_completo`, `asunto`, `descripcion`, `telefono`, `fecha`, `estado`, `ubicacion`) VALUES
+(12, '1A-11', 'Juan Fernández', 'Reportando la prueba', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '04121234567', '2025-07-02 22:37:35', 'resuelto', '1A-11'),
+(14, 'juanfg', 'Juan Fernandez', 'Reporte de Prueba para Presidente condominio', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like', '04143001934', '2025-07-03 00:51:06', 'en_proceso', '1A');
 
 -- --------------------------------------------------------
 
@@ -1725,7 +1777,54 @@ INSERT INTO `visitas` (`id`, `usuario`, `tipo_usuario`, `ip`, `fecha`) VALUES
 (6, 'juanfg', 'presidente_central', '::1', '2025-06-24 19:40:30'),
 (7, 'juanfg', 'presidente_junta', '::1', '2025-06-24 19:44:55'),
 (8, 'juanfg', 'presidente_central', '::1', '2025-06-24 21:12:29'),
-(9, 'juanfg', 'presidente_junta', '::1', '2025-06-24 21:38:03');
+(9, 'juanfg', 'presidente_junta', '::1', '2025-06-24 21:38:03'),
+(10, '1A-11', 'residente', '::1', '2025-06-30 10:04:48'),
+(11, '1A-11', 'residente', '::1', '2025-06-30 12:01:39'),
+(12, 'juangf', 'presidente_junta', '::1', '2025-06-30 12:02:03'),
+(13, 'juanfg', 'presidente_junta', '::1', '2025-06-30 12:05:25'),
+(14, '1A-11', 'residente', '::1', '2025-07-01 09:19:06'),
+(15, 'juanfg', 'presidente_junta', '::1', '2025-07-01 09:34:20'),
+(16, 'juanfg', 'presidente_junta', '::1', '2025-07-01 09:47:19'),
+(17, 'juanfg', 'presidente_junta', '::1', '2025-07-01 09:51:22'),
+(18, 'juanfg', 'presidente_junta', '::1', '2025-07-01 10:08:03'),
+(19, 'juanfg', 'presidente_junta', '::1', '2025-07-01 10:28:44'),
+(20, 'juangf', 'presidente_junta', '::1', '2025-07-01 10:34:54'),
+(21, 'juanfg', 'presidente_central', '::1', '2025-07-01 10:46:15'),
+(22, 'juangf', 'presidente_junta', '::1', '2025-07-01 10:47:08'),
+(23, 'juanfg', 'presidente_central', '::1', '2025-07-01 10:47:49'),
+(24, 'pedro11', 'presidente_junta', '::1', '2025-07-01 10:48:37'),
+(25, 'juanfg', 'presidente_central', '::1', '2025-07-01 10:50:16'),
+(26, '1A-11', 'residente', '::1', '2025-07-01 17:46:07'),
+(27, 'juanfg', 'presidente_central', '::1', '2025-07-02 12:57:15'),
+(28, '1A-11', 'residente', '::1', '2025-07-02 12:58:09'),
+(29, '1A-11', 'residente', '::1', '2025-07-02 13:25:35'),
+(30, '1A-11', 'residente', '::1', '2025-07-02 16:20:37'),
+(31, '1A-11', 'residente', '::1', '2025-07-02 16:25:56'),
+(32, 'juanfg', 'presidente_central', '::1', '2025-07-02 16:45:51'),
+(33, 'juanfg', 'presidente_central', '::1', '2025-07-02 18:03:53'),
+(34, 'juanfg', 'presidente_junta', '::1', '2025-07-02 18:35:36'),
+(35, 'juanfg', 'presidente_junta', '::1', '2025-07-02 19:04:34'),
+(36, '1A-11', 'residente', '::1', '2025-07-02 19:15:36'),
+(37, '1A-11', 'residente', '::1', '2025-07-03 16:33:47'),
+(38, 'juanfg', 'presidente_junta', '::1', '2025-07-03 16:34:32'),
+(39, 'juanfg', 'presidente_junta', '::1', '2025-07-03 16:41:42'),
+(40, 'juanfg', 'presidente_junta', '::1', '2025-07-03 16:43:42'),
+(41, 'juanfg', 'presidente_central', '::1', '2025-07-03 16:44:13'),
+(42, 'juanfg', 'presidente_central', '127.0.0.1', '2025-07-03 16:47:07'),
+(43, 'juanfg', 'presidente_central', '127.0.0.1', '2025-07-03 16:51:07'),
+(44, 'juanfg', 'presidente_junta', '127.0.0.1', '2025-07-03 16:51:50'),
+(45, 'juanfg', 'presidente_junta', '127.0.0.1', '2025-07-03 16:52:56'),
+(46, 'juanfg', 'presidente_junta', '127.0.0.1', '2025-07-03 16:53:17'),
+(47, 'juanfg', 'presidente_junta', '127.0.0.1', '2025-07-03 16:53:27'),
+(48, 'juanfg', 'presidente_junta', '127.0.0.1', '2025-07-03 16:54:11'),
+(49, 'juanfg', 'presidente_junta', '::1', '2025-07-03 16:58:35'),
+(50, '1A-11', 'residente', '::1', '2025-07-03 17:14:05'),
+(51, 'juanfg', 'presidente_central', '::1', '2025-07-03 17:14:27'),
+(52, 'juanfg', 'presidente_junta', '::1', '2025-07-03 17:14:48'),
+(53, 'juanfg', 'presidente_central', '::1', '2025-07-03 17:20:39'),
+(54, 'juanfg', 'presidente_junta', '::1', '2025-07-03 17:21:54'),
+(55, '1A-51', 'residente', '::1', '2025-07-03 17:30:29'),
+(56, '1A-11', 'residente', '::1', '2025-07-03 17:31:26');
 
 --
 -- Índices para tablas volcadas
@@ -1796,6 +1895,12 @@ ALTER TABLE `presidente_condominio`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `reportes`
+--
+ALTER TABLE `reportes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `servicios`
 --
 ALTER TABLE `servicios`
@@ -1839,7 +1944,7 @@ ALTER TABLE `comunicados`
 -- AUTO_INCREMENT de la tabla `deudas`
 --
 ALTER TABLE `deudas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT de la tabla `informes`
@@ -1851,7 +1956,7 @@ ALTER TABLE `informes`
 -- AUTO_INCREMENT de la tabla `pagos`
 --
 ALTER TABLE `pagos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `presidente_central`
@@ -1866,6 +1971,12 @@ ALTER TABLE `presidente_condominio`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `reportes`
+--
+ALTER TABLE `reportes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
@@ -1875,7 +1986,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `visitas`
 --
 ALTER TABLE `visitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- Restricciones para tablas volcadas

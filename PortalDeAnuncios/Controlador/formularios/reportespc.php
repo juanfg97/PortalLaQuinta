@@ -32,7 +32,7 @@ $telefono = trim($_SESSION['telefono']);
 $nombre_completo = trim($_SESSION['nombre_completo']);
 $fecha = date('Y-m-d H:i:s');
 $estado = 'pendiente';
-$ubicacion = $usuario; 
+$ubicacion = $_SESSION['Terraza'].$_SESSION['Edificio'];
 
 // Validaciones básicas
 if ($asunto === '' || $descripcion === '') {

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (empty($_SESSION['usuario'])) {
+if(!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'presidente_junta') {
     session_destroy();
     header('Location: /PortalDeAnuncios/index.php');
     exit();
@@ -61,7 +61,7 @@ include '../../Controlador/conexion_bd_login.php';
                         </div>
                         <div class="logo-text">
                             <h1>LA QUINTA</h1>
-                            <span>Portal Residente</span>
+                            <span>Portal Presidente de la junta de condominio</span>
                         </div>
                     </div>
                 </div>

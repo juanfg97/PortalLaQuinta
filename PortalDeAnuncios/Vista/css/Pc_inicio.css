@@ -9,6 +9,26 @@
             --warning-color: #ffc107;
             --info-color: #17a2b8;
         }
+        /* Botón Menú Hamburguesa */
+        .mobile-menu-toggle {
+            display: none;
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            font-size: 20px;
+            padding: 10px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .mobile-menu-toggle:hover {
+            background: var(--secondary-color);
+        }
+
+        .mobile-menu-toggle.active {
+            background: var(--accent-color);
+        }
         
         body {
             background-color: var(--light-color);

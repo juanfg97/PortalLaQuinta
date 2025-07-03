@@ -1,7 +1,6 @@
 <?php
 session_start();
-if (empty($_SESSION['usuario'])) {
-    // Redirigir si no hay sesión activa
+if(!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'residente') {
     session_destroy();
     header('Location: /PortalDeAnuncios/index.php');
     exit();
@@ -49,7 +48,7 @@ include  '../../Controlador/conexion_bd_login.php';
                 
                 <div class="user-info-mobile">
                     <h5>Bienvenido <?php   echo $_SESSION['nombre_completo']; ?></h5>
-                    <a href="" class="btn btn-outline-primary btn-sm">
+                    <a href="../../Controlador/funciones/logout.php" class="btn btn-outline-primary btn-sm">
                         <i class="fas fa-sign-out-alt me-1"></i>Cerrar Sesión
                     </a>
                 </div>

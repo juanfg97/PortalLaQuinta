@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (empty($_SESSION['usuario'])) {
+if(!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'presidente_central') {
     session_destroy();
     header('Location: /PortalDeAnuncios/index.php');
     exit();

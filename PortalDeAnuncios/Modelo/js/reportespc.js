@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             return;
         }
-          if (asunto.length < 10) {
+        if (asunto.length < 10) {
             Swal.fire({
                 icon: 'error',
                 title: 'Asunto demasiado corto',
@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             return;
         }
-
 
         if (descripcion.length > 1000) {
             Swal.fire({
@@ -52,7 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             return;
         }
-         if (descripcion.length < 100) {
+        
+        if (descripcion.length < 100) {
             Swal.fire({
                 icon: 'error',
                 title: 'Descripción muy corta',
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         formData.append("descripcion", descripcion);
 
         try {
-            const response = await fetch("../../Controlador/formularios/reportes.php", {
+            const response = await fetch("../../Controlador/formularios/reportespc.php", {
                 method: "POST",
                 body: formData
             });

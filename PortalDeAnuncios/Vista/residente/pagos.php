@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (empty($_SESSION['usuario'])) {
+if(!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'residente') {
     session_destroy();
     header('Location: /PortalDeAnuncios/index.php');
     exit();
@@ -44,7 +44,7 @@ include  '../../Controlador/conexion_bd_login.php';
                 
                 <div class="user-info-mobile">
                     <h5>Bienvenido <?php   echo $_SESSION['nombre_completo']; ?></h5>
-                    <a href="" class="btn btn-outline-primary btn-sm">
+                    <a href="../../Controlador/funciones/logout.php" class="btn btn-outline-primary btn-sm">
                         <i class="fas fa-sign-out-alt me-1"></i>Cerrar Sesión
                     </a>
                 </div>
@@ -510,7 +510,7 @@ include  '../../Controlador/conexion_bd_login.php';
     </div>
   </div>
 
-  <!-- Teléfono obligatorio, siempre visible -->
+  
   <div class="mb-3">
     <label for="phoneNumberInput" class="form-label">Número de Teléfono</label>
     <input type="text" id="phoneNumberInput" name="phoneNumber" class="form-control" placeholder="Ej: 04241234567" required>
@@ -772,183 +772,266 @@ function updateUploadAreaText(hasFiles) {
 }
 
 // === MANEJO DEL FORMULARIO ===
+
 if (paymentForm) {
-    paymentForm.addEventListener('submit', function(e) {
-        e.preventDefault();
+  paymentForm.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-        // Validar selección de deuda
-        if (!debtSelect.value) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Deuda no seleccionada',
-                text: 'Por favor selecciona una deuda para pagar.'
-            });
-            return;
-        }
+    // Validar selección de deuda
+    if (!debtSelect.value) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Deuda no seleccionada',
+        text: 'Por favor selecciona una deuda para pagar.'
+      });
+      return;
+    }
 
-        // Validar monto (hiddenPaymentAmount)
-        const montoPagado = hiddenPaymentAmount.value.trim();
-        if (!/^\d+(\.\d{2})$/.test(montoPagado)) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Monto inválido',
-                text: 'El monto debe ser un número decimal con exactamente dos decimales. Ejemplo: 100.00'
-            });
-            return;
-        }
-const cedulaInput = document.getElementById('cedulaInput');
-const cedulaValue = cedulaInput.value.trim();
+    // Validar monto oculto
+    const montoPagado = hiddenPaymentAmount.value.trim();
+    if (!/^\d+(\.\d{2})$/.test(montoPagado)) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Monto inválido',
+        text: 'El monto debe ser un número decimal con dos decimales. Ejemplo: 100.00'
+      });
+      return;
+    }
 
-const cedulaPattern = /^[VEJ]-\d{6,9}$/i;
-
-if (!cedulaPattern.test(cedulaValue)) {
-    Swal.fire({
+    // Cédula
+    const cedulaInput = document.getElementById('cedulaInput');
+    const cedulaValue = cedulaInput.value.trim();
+    const cedulaPattern = /^[VEJ]-\d{6,9}$/i;
+    if (!cedulaPattern.test(cedulaValue)) {
+      Swal.fire({
         icon: 'warning',
         title: 'Número de cédula inválido',
-        text: 'El número de cédula debe tener el formato correcto, por ejemplo: V-12345678, E-1234567, o J-123456789.'
-    });
-    return;
-}
+        text: 'Formato válido: V-12345678, E-1234567, J-123456789.'
+      });
+      return;
+    }
 
+    // Método de pago
+    if (!paymentMethodSelect.value) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Método de pago',
+        text: 'Por favor selecciona un método de pago.'
+      });
+      return;
+    }
 
-        // Validar método de pago seleccionado
-        if (!paymentMethodSelect.value) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Método de pago',
-                text: 'Por favor selecciona un método de pago.'
-            });
-            return;
-        }
+    // Comprobante
+    if (!uploadedFiles || uploadedFiles.children.length === 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Comprobante requerido',
+        text: 'Por favor sube el comprobante de pago.'
+      });
+      return;
+    }
 
-        // Validar que se haya subido al menos un comprobante
-        if (!uploadedFiles || uploadedFiles.children.length === 0) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Comprobante requerido',
-                text: 'Por favor sube el comprobante de pago.'
-            });
-            return;
-        }
+    // Fecha de pago
+    const paymentDate = document.getElementById('paymentDate').value;
+    if (!paymentDate) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Fecha de pago',
+        text: 'Por favor ingresa la fecha del pago.'
+      });
+      return;
+    }
 
-        // Validar fecha del pago
-        const paymentDate = document.getElementById('paymentDate').value;
-        if (!paymentDate) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Fecha de pago',
-                text: 'Por favor ingresa la fecha del pago.'
-            });
-            return;
-        }
+    // Banco origen
+    const bankOrigin = document.getElementById('bankOrigin').value.trim();
+    if (!bankOrigin) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Banco Origen',
+        text: 'Por favor ingresa el banco desde donde se realizó el pago.'
+      });
+      return;
+    }
 
-        // Validar banco origen
-        const bankOrigin = document.getElementById('bankOrigin').value.trim();
-        if (!bankOrigin) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Banco Origen',
-                text: 'Por favor ingresa el banco desde donde se realizó el pago.'
-            });
-            return;
-        }
-
-        // Validar número de teléfono (debe iniciar con 04 y tener 10 dígitos)
-        const phoneInput = document.getElementById('phoneNumberInput');
-        const phoneValue = phoneInput.value.trim();
-       if (!/^\d{11}$/.test(phoneValue)) {
-    Swal.fire({
+    // Teléfono
+    const phoneInput = document.getElementById('phoneNumberInput');
+    const phoneValue = phoneInput.value.trim();
+    if (!/^04\d{9}$/.test(phoneValue)) {
+      Swal.fire({
         icon: 'warning',
         title: 'Número de teléfono inválido',
-        text: 'El número de teléfono no es válido.'
-    });
-    return;
-}
-
-        // Validar número de referencia (13 dígitos)
-        const referenceInput = document.getElementById('referenceNumberInput');
-        const referenceValue = referenceInput.value.trim();
-        if (!/^\d{13}$/.test(referenceValue)) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Número de referencia inválido',
-                text: 'El número de referencia debe tener exactamente 13 dígitos numéricos.'
-            });
-            return;
-        }
-
-        // Validar monto pagado ingresado en el input (paidAmountInput)
-        const paidAmountInput = document.getElementById('paidAmountInput');
-        const paidAmountValue = paidAmountInput.value.trim();
-        if (!/^\d+(\.\d{2})$/.test(paidAmountValue)) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Monto pagado inválido',
-                text: 'El monto pagado debe ser un número decimal con exactamente dos decimales. Ejemplo: 100.00'
-            });
-            return;
-        }
-
-       // Crear FormData para envío
-const formData = new FormData();
-formData.append('paymentMethod', paymentMethodSelect.value);
-formData.append('debtId', debtSelect.value);
-formData.append('paymentDate', paymentDate);
-formData.append('bankOrigin', bankOrigin);
-formData.append('phoneNumber', phoneValue);
-formData.append('referenceNumber', referenceValue);
-formData.append('paidAmount', paidAmountValue);
-formData.append('comments', document.getElementById('commentsInput').value.trim());
-formData.append('cedulaInput', cedulaValue);
-
-if (fileInput.files.length > 0) {
-    formData.append('comprobante', fileInput.files[0]); // Solo el primer archivo
-}
-
-// Mostrar en consola cada par clave-valor de formData
-for (const pair of formData.entries()) {
-    if (pair[0] === 'comprobante') {
-        console.log(pair[0] + ': ', pair[1].name);  // para archivos mostrar el nombre
-    } else {
-        console.log(pair[0] + ': ' + pair[1]);
+        text: 'Debe comenzar con 04 y tener 11 dígitos.'
+      });
+      return;
     }
-}
 
-// Enviar datos con fetch
-fetch('../../Controlador/formularios/registrarpago.php', {
-    method: 'POST',
-    body: formData
-})
-.then(response => response.json())
-.then(result => {
-    if (result.success) {
-        Swal.fire({
-            icon: 'success',
-            title: 'Pago registrado',
-            text: result.message || 'El pago fue registrado exitosamente.'
-        }).then(() => {
-            location.reload();
-        });
-    } else {
-        Swal.fire({
+    // Referencia
+    const referenceInput = document.getElementById('referenceNumberInput');
+    const referenceValue = referenceInput.value.trim();
+    if (!/^\d{13}$/.test(referenceValue)) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Número de referencia inválido',
+        text: 'Debe contener exactamente 13 dígitos numéricos.'
+      });
+      return;
+    }
+
+    // Monto pagado visible
+    const paidAmountInput = document.getElementById('paidAmountInput');
+    const paidAmountValue = paidAmountInput.value.trim();
+    if (!/^\d+(\.\d{2})$/.test(paidAmountValue)) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Monto pagado inválido',
+        text: 'Debe tener dos decimales. Ej: 100.00'
+      });
+      return;
+    }
+
+    // Comentario
+    const comments = document.getElementById('commentsInput').value.trim();
+
+    // Crear FormData
+    const formData = new FormData();
+    formData.append('paymentMethod', paymentMethodSelect.value);
+    formData.append('debtId', debtSelect.value);
+    formData.append('paymentDate', paymentDate);
+    formData.append('bankOrigin', bankOrigin);
+    formData.append('phoneNumber', phoneValue);
+    formData.append('referenceNumber', referenceValue);
+    formData.append('paidAmount', paidAmountValue);
+    formData.append('comments', comments);
+    formData.append('cedulaInput', cedulaValue);
+    if (fileInput.files.length > 0) {
+      formData.append('comprobante', fileInput.files[0]);
+    }
+
+    // Mostrar formData en consola
+    for (const pair of formData.entries()) {
+      if (pair[0] === 'comprobante') {
+        console.log(pair[0] + ': ', pair[1].name);
+      } else {
+        console.log(pair[0] + ': ' + pair[1]);
+      }
+    }
+
+    // Confirmación de impresión
+    Swal.fire({
+      title: '¿Deseas imprimir el resumen del pago?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, imprimir',
+      cancelButtonText: 'No, continuar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Obtener usuario desde PHP
+        const userName = "<?php echo $_SESSION['usuario']; ?>";
+
+        const ventana = window.open('', '', 'width=1000,height=800');
+        ventana.document.write(`
+          <html>
+          <head>
+            <title>Resumen del Pago</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                padding: 40px;
+                background-color: #f8f9fa;
+              }
+              h2 {
+                text-align: center;
+                margin-bottom: 30px;
+              }
+              .table th {
+                background-color: #343a40;
+                color: white;
+              }
+              .table td, .table th {
+                padding: 10px;
+                border: 1px solid #dee2e6;
+              }
+              .footer {
+                margin-top: 40px;
+                text-align: center;
+                font-size: 0.85rem;
+                color: #666;
+              }
+              img.logo {
+                display: block;
+                margin: 0 auto 20px auto;
+                max-width: 150px;
+              }
+            </style>
+          </head>
+          <body>
+            <img src="../../Vista/img/logo.png" alt="Logo" class="logo">
+            <h2>Resumen del Pago Registrado</h2>
+            <table class="table table-bordered">
+              <tr><th>Usuario</th><td>${userName}</td></tr>
+              <tr><th>Cédula</th><td>${cedulaValue}</td></tr>
+              <tr><th>Deuda</th><td>${debtSelect.options[debtSelect.selectedIndex].text}</td></tr>
+              <tr><th>Monto Total</th><td>${paidAmountValue} Bs</td></tr>
+              <tr><th>Fecha de Pago</th><td>${paymentDate}</td></tr>
+              <tr><th>Método de Pago</th><td>${paymentMethodSelect.options[paymentMethodSelect.selectedIndex].text}</td></tr>
+              <tr><th>Banco Origen</th><td>${bankOrigin}</td></tr>
+              <tr><th>Teléfono</th><td>${phoneValue}</td></tr>
+              <tr><th>Referencia</th><td>${referenceValue}</td></tr>
+              <tr><th>Comentario</th><td>${comments}</td></tr>
+            </table>
+            <div class="footer">Comprobante generado automáticamente — Sistema de Pagos</div>
+            <script>
+              window.onload = function() {
+                window.print();
+                window.onafterprint = () => window.close();
+              }
+            <\/script>
+          </body>
+          </html>
+        `);
+
+        enviarFormularioYRecargar();
+      } else {
+        enviarFormularioYRecargar();
+      }
+    });
+
+    // Función para enviar y recargar
+    function enviarFormularioYRecargar() {
+      fetch('../../Controlador/formularios/registrarpago.php', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(result => {
+          if (result.success) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Pago registrado',
+              text: result.message || 'El pago fue registrado exitosamente.'
+            }).then(() => {
+              location.reload();
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: result.message || 'Ocurrió un error al registrar el pago.'
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error al enviar el formulario:', error);
+          Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: result.message || 'Ocurrió un error al registrar el pago.'
+            text: 'No se pudo enviar el formulario. Intenta nuevamente.'
+          });
         });
     }
-})
-.catch(error => {
-    console.error('Error al enviar el formulario:', error);
-    Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'No se pudo enviar el formulario. Intenta nuevamente.'
-    });
-});
 
-})}
-
-
-    </script>
-    </body>
+  });
+</script>
+</body>
 </html>

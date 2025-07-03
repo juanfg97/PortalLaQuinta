@@ -118,6 +118,7 @@ if (totalPaginas <= 1) {
         if (nuevaPagina >= 1 && nuevaPagina <= totalPaginas) {
             paginaActual = nuevaPagina;
             renderPagosPaginados();
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
 
@@ -135,9 +136,6 @@ if (totalPaginas <= 1) {
         
         renderPagos(pagosPagina);
         crearControlesPaginacion(totalPaginas);
-        
-        // Scroll suave al inicio del contenedor
-        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     // Función para renderizar los pagos (mantienes tu función original)

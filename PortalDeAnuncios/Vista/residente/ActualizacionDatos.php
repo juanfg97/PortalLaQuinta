@@ -1,7 +1,6 @@
 <?php
 session_start();
-if (empty($_SESSION['usuario'])) {
-    // Redirigir si no hay sesión activa
+if(!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'residente') {
     session_destroy();
     header('Location: /PortalDeAnuncios/index.php');
     exit();
@@ -25,7 +24,7 @@ if (empty($_SESSION['usuario'])) {
         <div class="container header-container">
             <div class="logo">
                 <div class="logo-image">
-                    <!-- Espacio para el logo de La Quinta -->
+                    
                     <img src="../Img/logo.png" alt="Logo La Quinta">
                 </div>
                 <div class="logo-text">
