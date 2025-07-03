@@ -55,7 +55,7 @@ document.getElementById('announcementForm').addEventListener('submit', function 
     }
 
     // Validar categoría permitida
-    const allowedCategories = ['info', 'alert', 'event']; // Cambia según tus categorías reales
+    const allowedCategories = ['General', 'Mantenimiento', 'Seguridad','Eventos','Urgente']; 
     const category = document.getElementById('announcementCategory').value;
     if (!allowedCategories.includes(category)) {
         Swal.fire({
@@ -174,7 +174,6 @@ function formatearFecha(fecha) {
     const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(fecha).toLocaleDateString('es-ES', opciones);
 }
-
 function eliminarAnuncio(Id) {
     Swal.fire({
         title: '¿Eliminar este anuncio?',
@@ -192,24 +191,61 @@ function eliminarAnuncio(Id) {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: 'id_anuncio=' + encodeURIComponent(Id)
             })
-            .then(response => response.json())
+            .then(response => {
+                return response.text().then(text => {
+                    // Extraer JSON limpio si hay warnings/errors antes
+                    const jsonMatch = text.match(/\{.*\}$/);
+                    if (jsonMatch) {
+                        try {
+                            return JSON.parse(jsonMatch[0]);
+                        } catch (e) {
+                            throw new Error('Error parsing JSON: ' + text);
+                        }
+                    } else {
+                        throw new Error('No JSON found in response: ' + text);
+                    }
+                });
+            })
             .then(data => {
                 if (data.success) {
-                    Swal.fire('Eliminado', data.message, 'success');
-                    const anuncio = document.getElementById('anuncio-' + Id);
-                    if (anuncio) anuncio.remove();
+                    Swal.fire('Eliminado', data.message, 'success').then(() => {
+                        location.reload();
+                    });
                 } else {
                     Swal.fire('Error', data.message, 'error');
                 }
             })
             .catch(error => {
+                console.error('Error:', error);
                 Swal.fire('Error', 'Ocurrió un error al eliminar.', 'error');
-                console.error(error);
             });
         }
     });
 }
+// Limpia el formulario cada vez que se cierra el modal
+document.getElementById('addAnnouncementModal').addEventListener('hidden.bs.modal', function () {
+    document.getElementById('announcementForm').reset();
 
+    // Limpiar errores visuales
+    document.getElementById('announcementTitle').classList.remove('is-invalid');
+    document.getElementById('announcementContent').classList.remove('is-invalid');
+    document.getElementById('tituloError').style.display = 'none';
+    document.getElementById('descripcionError').style.display = 'none';
+
+    // Ocultar vista previa de imagen
+    document.getElementById('imagePreview').src = '';
+    document.getElementById('imagePreview').style.display = 'none';
+
+    // Resetear valores ocultos y texto de botones
+    document.getElementById('formMode').value = 'crear';
+    document.getElementById('announcementId').value = '';
+    document.getElementById('addAnnouncementModalLabel').textContent = '📝 Crear Nuevo Anuncio del edificio';
+
+    const submitBtn = document.getElementById('submitAnnouncementBtn');
+    submitBtn.textContent = '📤 Publicar Anuncio';
+    submitBtn.classList.remove('btn-azul');
+    submitBtn.classList.add('btn-primary');
+});
 function modificarAnuncio(id) {
     fetch(`../../Controlador/formularios/obteneranuncio.php?id=${id}`)
         .then(res => res.json())
