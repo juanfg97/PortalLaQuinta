@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-07-2025 a las 23:38:38
+-- Tiempo de generación: 05-07-2025 a las 01:52:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -46,7 +46,7 @@ INSERT INTO `anunciosg` (`Id`, `Titulo`, `Descripcion`, `Autor`, `Categoria`, `I
 (8, '¡AVISO URGENTE! Interrupción Programada del Servicio de Agua', 'Estimados residentes, les informamos que el servicio de agua potable será interrumpido el viernes 13 de junio de 2025, de 9:00 a.m. a 3:00 p.m., debido a trabajos de reparación esenciales en la tubería principal. Les rogamos tomar las precauciones necesarias y almacenar agua para ese período. Agradecemos su comprensión y colaboración.', 'Presidente central', 'Urgente', '../../Vista/anunciosimg/anuncio_684486c0cb830.png', '2025-06-07 14:36:48'),
 (9, ' Reforzando la Seguridad en Nuestra Urbanización ', 'La seguridad de nuestra comunidad es una prioridad. Queremos recordarles la importancia de mantener puertas y portones cerrados con llave y de no permitir el acceso a personas desconocidas. Si observan alguna actividad sospechosa, por favor repórtenla de inmediato a la garita de seguridad al  04161234567. ¡Trabajemos juntos para mantener nuestra urbanización segura!', 'Equipo de seguridad', 'Seguridad', NULL, '2025-06-07 14:38:09'),
 (10, 'Novedades y Recordatorios para Nuestros Residentes ', '¡Hola a todos! Les recordamos la importancia de mantener limpias las áreas comunes y de recoger los desechos de sus mascotas. Próximamente compartiremos detalles sobre la asamblea vecinal. Su participación es fundamental para el bienestar de nuestra comunidad. ¡Gracias por ser parte de nuestra urbanización!', 'Presidente central', 'General', NULL, '2025-06-07 14:39:50'),
-(11, 'Próximo Mantenimiento de Áreas azul', 'Les informamos que el equipo de mantenimiento realizará trabajos de jardinería y poda en las áreas verdes comunes la próxima semana, del lunes 16 al miércoles 18 de junio de 2025. Agradecemos su colaboración evitando transitar por las zonas señalizadas durante estos días. Esto nos permitirá mantener nuestra urbanización hermosa y bien cuidada.', 'Equipo de mantenimiento', 'Mantenimiento', '../../Vista/anunciosimg/anuncio_684487c8eedc1.jpg', '2025-06-14 14:30:46');
+(11, 'Próximo Mantenimiento de Áreas azuli', 'Les informamos que el equipo de mantenimiento realizará trabajos de jardinería y poda en las áreas verdes comunes la próxima semana, del lunes 16 al miércoles 18 de junio de 2025. Agradecemos su colaboración evitando transitar por las zonas señalizadas durante estos días. Esto nos permitirá mantener nuestra urbanización hermosa y bien cuidada.', 'Equipo de mantenimiento', 'Mantenimiento', '../../Vista/anunciosimg/anuncio_684487c8eedc1.jpg', '2025-07-03 19:28:19');
 
 -- --------------------------------------------------------
 
@@ -193,7 +193,7 @@ INSERT INTO `deudas` (`id`, `usuario`, `tipo_deuda`, `monto`, `fecha_vencimiento
 (64, '1A-52', 'condominio', 500.00, '2025-06-30', '', '2025-06-25 04:00:00', 'pendiente', ''),
 (65, '1A-53', 'condominio', 500.00, '2025-06-30', '', '2025-06-25 04:00:00', 'pendiente', ''),
 (66, '1A-54', 'condominio', 500.00, '2025-06-30', '', '2025-06-25 04:00:00', 'pendiente', ''),
-(67, '1A-11', 'otros', 500.00, '2025-06-24', '', '2025-06-25 04:00:00', 'pendiente', NULL),
+(67, '1A-11', 'otros', 500.00, '2025-06-24', '', '2025-06-25 04:00:00', 'en proceso', NULL),
 (68, '1A-11', 'otros', 600.00, '2025-06-28', '', '2025-06-25 04:00:00', 'en proceso', NULL),
 (69, '1A-11', 'condominio', 500.00, '2025-06-26', '', '2025-06-25 04:00:00', 'en proceso', NULL),
 (70, '1A-12', 'condominio', 500.00, '2025-06-26', '', '2025-06-25 04:00:00', 'pendiente', NULL),
@@ -1641,7 +1641,8 @@ INSERT INTO `pagos` (`id`, `usuario`, `metodo_pago`, `deudaid`, `fecha_pago`, `b
 (16, '1A-11', 'transferencia', 24, '2025-06-14', 'banesco', '1234567890123', 'V-29557849', 50.00, '04143001934', 'comprobante_684dc18a734db_pago cuota 1.pdf', '2025-06-14 18:38:02', 'pago', 'aprobado'),
 (17, '1A-11', 'transferencia', 25, '2025-07-02', 'Mercantil', '0122093428429', 'V-29557849', 500.99, '04143001934', 'comprobante_6865c21d82523_descarga (1).jpg', '2025-07-02 23:34:53', 'pago de deuda', 'en proceso'),
 (18, '1A-11', 'pago_movil', 69, '2025-07-02', 'Mercantil', '0123456789012', 'V-29557849', 500.00, '04143001934', 'comprobante_6865c2b41cd86_futsal-unsplash.jpg', '2025-07-02 23:37:24', '', 'en proceso'),
-(19, '1A-11', 'transferencia', 68, '2025-07-02', 'Banesco', '0123212345654', 'V-29557849', 600.00, '04143001934', 'comprobante_6865c3cf85d01_CORTE.png', '2025-07-02 23:42:07', 'pago deuda', 'en proceso');
+(19, '1A-11', 'transferencia', 68, '2025-07-02', 'Banesco', '0123212345654', 'V-29557849', 600.00, '04143001934', 'comprobante_6865c3cf85d01_CORTE.png', '2025-07-02 23:42:07', 'pago deuda', 'en proceso'),
+(20, '1A-11', 'transferencia', 67, '2025-07-04', 'Banesco', '0986543212345', 'V-29557849', 500.00, '04143001934', 'comprobante_6868652530e36_CORTE.png', '2025-07-04 23:35:01', '', 'en proceso');
 
 -- --------------------------------------------------------
 
@@ -1665,7 +1666,7 @@ CREATE TABLE `presidente_central` (
 --
 
 INSERT INTO `presidente_central` (`id`, `usuario`, `password`, `ultima_modificacion`, `nombre_completo`, `telefono`, `correo`, `ultimo_login`) VALUES
-(1, 'juanfg', '$2y$10$FmKuIYZCteoB9NcsP5LVhuNQsGa1HJdv9rTN8lA1eDz4R8W/J2qZy', '2025-06-07', 'Juan Perez', '02123032547', 'juanito1@gmail.com', '2025-07-03 17:20:39');
+(1, 'juanfg', '$2y$10$FmKuIYZCteoB9NcsP5LVhuNQsGa1HJdv9rTN8lA1eDz4R8W/J2qZy', '2025-06-07', 'Juan Perez', '02123032547', 'juanito1@gmail.com', '2025-07-03 19:30:11');
 
 -- --------------------------------------------------------
 
@@ -1824,7 +1825,13 @@ INSERT INTO `visitas` (`id`, `usuario`, `tipo_usuario`, `ip`, `fecha`) VALUES
 (53, 'juanfg', 'presidente_central', '::1', '2025-07-03 17:20:39'),
 (54, 'juanfg', 'presidente_junta', '::1', '2025-07-03 17:21:54'),
 (55, '1A-51', 'residente', '::1', '2025-07-03 17:30:29'),
-(56, '1A-11', 'residente', '::1', '2025-07-03 17:31:26');
+(56, '1A-11', 'residente', '::1', '2025-07-03 17:31:26'),
+(57, 'juanfg', 'presidente_junta', '::1', '2025-07-03 19:17:22'),
+(58, 'juanfg', 'presidente_junta', '::1', '2025-07-03 19:18:44'),
+(59, 'juanfg', 'presidente_central', '::1', '2025-07-03 19:21:41'),
+(60, 'juanfg', 'presidente_junta', '::1', '2025-07-03 19:29:15'),
+(61, 'juanfg', 'presidente_central', '::1', '2025-07-03 19:30:11'),
+(62, '1A-11', 'residente', '::1', '2025-07-04 19:26:55');
 
 --
 -- Índices para tablas volcadas
@@ -1920,7 +1927,7 @@ ALTER TABLE `visitas`
 -- AUTO_INCREMENT de la tabla `anunciosg`
 --
 ALTER TABLE `anunciosg`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `anuncios_edificio`
@@ -1956,7 +1963,7 @@ ALTER TABLE `informes`
 -- AUTO_INCREMENT de la tabla `pagos`
 --
 ALTER TABLE `pagos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `presidente_central`
@@ -1986,7 +1993,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `visitas`
 --
 ALTER TABLE `visitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- Restricciones para tablas volcadas
